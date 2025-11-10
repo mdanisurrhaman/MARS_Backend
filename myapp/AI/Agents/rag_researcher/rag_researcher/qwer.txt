@@ -1,0 +1,50 @@
+import re
+import pandas as pd
+import numpy as np
+import warnings
+from sklearn.linear_model import LogisticRegression
+
+warnings.filterwarnings('ignore')
+
+df=pd.read_csv('SMSSpam.csv', encoding='ISO-8859-1',names=["label","sms"])
+df
+
+lable=df['label']
+lable
+
+sms=df["sms"]
+sms
+
+def tokenize(senteces):
+    senteces=senteces.lower()
+    senteces=re.sub(r"[^\w\s]","",senteces)
+    return senteces.split()
+
+tokenized_sms=[tokenize(i) for i in sms]
+tokenized_sms
+
+def build_vocabulary(tokenized_sentences):
+    vocabulary = set()
+    for sentence in tokenized_sentences:
+        vocabulary.update(sentence)
+    return list(vocabulary) 
+
+vocabulary=build_vocabulary(tokenized_sms)
+len(vocabulary)
+sorted(vocabulary)
+
+def create_bow_vector(sentence, vocabulary): 
+    vec = [0]*len(vocabulary)
+    for word in sentence:
+        if word in vocabulary:
+            idx = vocabulary.index(word)
+            vec[idx] = 1
+    return vec
+
+bow_vectors = [create_bow_vector(s, vocabulary) for s in tokenized_sms]
+len(bow_vectors)
+
+encoded_vectors = np.array(bow_vectors)
+encoded_vectors[0]
+
+cols=[i for i in vocabulary]

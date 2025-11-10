@@ -1,0 +1,53 @@
+load_reviews:
+  description: >
+    Input will be a dictionary with:
+      - {reviews_file}: path to the reviews file
+      - {file_type}: type of file
+
+    Use the FileReadTool with file_path set to reviews_file.
+    Read the entire file content and split it into a list of individual reviews,
+    one review per list element.
+
+    Ensure:
+    - The file exists and is readable
+    - Remove empty lines
+    - Output a clean Python list of review strings
+
+    This list will be passed to the sentiment_emotion_analyzer agent.
+  expected_output: >
+    A list of strings, each string being a customer review.
+  agent: fileloader
+
+analyze_sentiment_and_emotion:
+  description: >
+    Take the list of reviews from the load_reviews task output
+    and call the analyze_reviews tool with the following exact Action Input:
+
+    {
+      "reviews": <list of reviews from load_reviews>
+    }
+
+    The tool will return:
+      - positive_percent (XX.X)
+      - negative_percent (XX.X)
+      - neutral_percent (XX.X)
+      - dominant_emotion (list of up to 3 emotions)
+
+    Format your final answer as:
+
+    Based on the analysis of the customer reviews:
+
+    1. **Sentiment Analysis:**
+       * Percentage of Positive Reviews: XX.X%
+       * Percentage of Negative Reviews: XX.X%
+       * Percentage of Neutral Reviews: XX.X%
+
+    2. **Dominant Emotions:**
+       * Emotion 1: <emotion>
+       * Emotion 2: <emotion>
+       * Emotion 3: <emotion> (if applicable)
+  expected_output: >
+    A structured summary containing actual computed percentages and up to 3 dominant emotions.
+    No placeholders are allowed — values must come directly from analyze_reviews.
+  agent: sentiment_emotion_analyzer
+  context: [load_reviews]

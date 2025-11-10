@@ -1,0 +1,159 @@
+research_task:
+  description: >
+    recsearch on the topic provided in the {query} and this {query} also know as user giving query . there are some exapamples of the query and you can use them to understand the topic.
+    Examples of queries but don't use these giving examples as an {query} , use only user giving query:
+    - "What are the latest advancements in quantum computing?"
+    - genrate a report on "Artificial Intelligence in Healthcare"
+    - create report on "Sustainable Energy Solutions"
+    - genrate a report on "Artificial Intelligence in Healthcare" and send an email to xyz@gmail.com with report topic subject and report as body.
+
+
+    - {query}
+    don't use these giving examples as an query but use them to understand {query}.
+    if in the query user provide the email id then you must send the report to that email id.
+    if user provide the file path then you must attach that file to the email.
+    Make sure you find any interesting and relevant information about topic.
+    The time period should be at least within the last 4 months. Today is {date}.
+  expected_output: >
+    A list with 10 bullet points of the most relevant information about topic
+  agent: researcher
+  # output_file: output/research.txt
+
+
+reporting_task_long:
+  description: >
+    Review the context and expand each topic into a long-form report (~2300 words).
+    Include deep analysis, multiple sections, examples, and historical context.
+    This is for standalone reading — not email.
+  expected_output: >
+    A ~2300 word markdown report.
+  agent: reporting_analyst
+  context: [research_task]
+  output_file: output/report_long.txt
+
+reporting_task_short:
+  description: >
+    Review the context and create a concise executive report (~400 words) that’s email-friendly.
+    Focus on brevity, clarity, and only the most important points.
+  expected_output: >
+    A ~400 word markdown report.
+  agent: reporting_analyst
+  context: [research_task]
+  output_file: output/report_short.txt
+
+
+
+
+formatting_task:
+  description: >
+    Format the executive report into a beautiful markdown document without ''.
+    Follow these guidelines:
+    1. Use proper markdown headers
+    2. don't Include emojis
+    3. Format key findings and insights as bullet points
+    4. Add proper spacing and sections breaks
+    5. Make recommendations stand out using blockquotes
+    6. Ensure the date is properly formatted
+    7. Use horizontal rules (---) to separate major sections
+    8. Add inline citations for each major claim using (Author, Year) format
+    9. Include a Sources section at the end with numbered references
+    10. dont write Each source should include title, publisher/author, and URL
+    11. dont write Link inline citations to the corresponding entry in the Sources section
+  expected_output: >
+    A beautifully formatted markdown report with proper structure, spacing,
+    citations, and visual elements that enhance readability and presentation.
+    send the report to email id mentioned in {query} if user provide the email id.
+
+  agent: formatter
+  context: [reporting_task_short, reporting_task_long]
+  output_file: output/report.txt
+
+
+
+
+
+
+write_email_body:
+  description: >
+    Based on the provided {query}, write a complete email body that clearly conveys the intended
+    message. Adapt tone and structure depending on the context:
+    - Personal messages (e.g., checking on someone’s health)
+    - Work-related requests (e.g., asking for a file)
+    - Formal letters (e.g., job offers)
+    
+    Rules:
+    - Always begin with a greeting
+    - Keep paragraphs concise
+    - End with a courteous closing
+    - If {query} contains a subject, ensure body aligns with it
+    - If {query} contains a report request, acknowledge it in the email
+
+  expected_output: >
+    A polished plain-text email body ready for sending and send email to email id mentioned in {query} if user provide the email id.
+  agent: email_writer
+  output_file: output/email_body.txt
+
+
+
+send_email_task:
+  description: >
+    Interpret the user's instruction to send an email using SMTP.
+    Supports multiple recipients in query, separated by commas, semicolons, or spaces.
+    If more than 10 recipients are provided via query, send in bulk mode.
+    Still supports CSV file input for bulk sending.
+    You must also attach files if the {attach_file_path} is provided.
+
+    Before invoking the tool:
+    - Normalize common typos in the query such as:
+        * "sibject" or "subjet" → "subject"
+        * "emial" or "mail" → "email"
+    - If no subject is found in {query}, you MUST create one yourself based on the provided
+      message body, AI-generated content, or report.
+        * Pick a short and clear title (max 120 characters)
+        * Reflect the main idea of the message or report
+    - This ensures the email is never sent with "No Subject".
+
+    Your responsibilities include:
+    - Parsing the {query} to extract:
+        * A single email or list of recipients via {csv_file}
+        * A message body, which may come from:
+            - User-provided text in the query (e.g., "send this message...")
+            - AI-generated text from the write_email_body task
+            - A report from the generate_report task
+        * A subject, which may be explicitly given or, if missing, AI-generated as above
+    - Attaching a file if the {attach_file_path} is provided
+    - Validating SMTP configuration before sending
+    - Sending either a single or bulk email depending on whether {csv_file} is present
+    - Combining the AI-generated content and inline message into one body, when both are present
+
+    Examples:
+    - Query: "Write an email to sheikhupdesk@gmail.com and in send this message 'ask him where is the file kept', Also tell him the benefits of Technology"
+    - Query: "Generate a report on AI regulation and send it to john@example.com with subject 'AI Update'"
+    - Query: "Send the report to clients listed in clients.csv with subject 'Compliance Update' and attach the file"
+    - Query: "Write an emails which i provided in csv file and in send this message 'ask him where is the file kept', Also tell him the benefits of Technology"
+    - Query: {query}
+    - Query: Send this message 'Hello team' to a@example.com, b@example.com
+    - Query: Send the report to john@example.com; jane@example.com; mark@example.com
+    - Query: Send 'Reminder for tomorrow's meeting' to 12 recipients listed in query
+    You MUST ensure:
+    - If user says in {query} "attach" in any form, you must attach a file.
+    - Both report and AI-generated content are passed to the tool for use in the final message body.
+    - A meaningful subject line is always set.
+
+  expected_output: >
+    A detailed status report of the email operation, including:
+    - Whether the email was sent successfully
+    - The recipient(s)
+    - The subject
+    - Whether AI content or a report was used
+    - Any attachment status
+    - Clear error messages if something failed (e.g., missing subject, broken CSV, file not found)
+
+  agent: email_assistant
+
+  input_map:
+    query: query
+    attach_file_path: attach_file_path
+    csv_file: csv_file
+    report_content: generate_report
+    ai_generated_body: write_email_body

@@ -1,0 +1,1004 @@
+{
+    "profiles_with_email": [
+        {
+            "name": "Rupesh Raut",
+            "company": "Oracle Financial Services Software",
+            "blog": "",
+            "location": "Mumbai, India",
+            "email": "rupeshraut99396@gmail.com",
+            "hireable": null,
+            "bio": "IT Undergrad | Full Stack Developer",
+            "public_repos": 41
+        },
+        {
+            "name": "Nikhil N Namal",
+            "company": null,
+            "blog": "https://nikhilnamal.netlify.com/",
+            "location": "Mumbai, India",
+            "email": "nikhilnamal16@gmail.com",
+            "hireable": true,
+            "bio": "Full Stack Developer.\r\nIn love with JavaScript.",
+            "public_repos": 92
+        },
+        {
+            "name": "Jatin Varlyani",
+            "company": "BlackRock",
+            "blog": "",
+            "location": "Mumbai",
+            "email": "varlyanijatin88@gmail.com",
+            "hireable": true,
+            "bio": "Full Stack Developer \ud83d\ude80 | Java | JavaScript | Love Exploring New Technologies \ud83c\udf08",
+            "public_repos": 74
+        },
+        {
+            "name": "Abhishek Satre",
+            "company": null,
+            "blog": "https://abhisheksatre.com",
+            "location": "Mumbai",
+            "email": "hi@abhisheksatre.com",
+            "hireable": null,
+            "bio": "Full Stack Developer",
+            "public_repos": 15
+        },
+        {
+            "name": "Suryakant Thombare",
+            "company": "draftqe",
+            "blog": "",
+            "location": "Mumbai, India",
+            "email": "suryathombre000@gmail.com",
+            "hireable": true,
+            "bio": "Full Stack Developer",
+            "public_repos": 71
+        },
+        {
+            "name": "Rachit Chheda",
+            "company": null,
+            "blog": "rachit-chheda.netlify.app",
+            "location": "Mumbai , India",
+            "email": "rachitchheda16@gmail.com",
+            "hireable": true,
+            "bio": "Full Stack Developer | MERN STACK | Computer Student ",
+            "public_repos": 17
+        },
+        {
+            "name": "Bhaumik Kore",
+            "company": "Flashy Panels",
+            "blog": "",
+            "location": "Mumbai",
+            "email": "bhaumik.kore31@gmail.com",
+            "hireable": null,
+            "bio": "Full Stack Developer",
+            "public_repos": 18
+        },
+        {
+            "name": "Aditi Chowdhuri",
+            "company": null,
+            "blog": "",
+            "location": "Mumbai",
+            "email": "aditichowdhuri99@gmail.com",
+            "hireable": true,
+            "bio": "Full-Stack Web Developer\r\nUi/Ux designer",
+            "public_repos": 32
+        },
+        {
+            "name": "Akash Ranjan",
+            "company": null,
+            "blog": "blogs.akashranjan.in",
+            "location": "Mumbai, India",
+            "email": "akashdeveloper005@gmail.com",
+            "hireable": true,
+            "bio": "Full stack Python Developer | ReactJs | NodeJs | Deep Learning | AWS | Docker | Kubernetes",
+            "public_repos": 60
+        },
+        {
+            "name": "Krishnakant Salkar",
+            "company": null,
+            "blog": "https://www.krishnakantsalkar.in/",
+            "location": "Mumbai",
+            "email": "dev@krishnakantsalkar.in",
+            "hireable": true,
+            "bio": "Full Stack Developer",
+            "public_repos": 24
+        },
+        {
+            "name": "Deepanshu Vangani",
+            "company": null,
+            "blog": "deepanshu2506.github.io",
+            "location": "Kharghar, Navi Mumbai",
+            "email": "vanganideepanshu@gmail.com",
+            "hireable": true,
+            "bio": "22 | SDE | Full stack web and cross-platform mobile apps developer\r\n\r\n",
+            "public_repos": 42
+        },
+        {
+            "name": "Mayank Singh",
+            "company": "Edra Labs",
+            "blog": "https://linktr.ee/bymayanksingh",
+            "location": "Mumbai",
+            "email": "mayank.singh081997@gmail.com",
+            "hireable": true,
+            "bio": "Building Edra Labs | Former SSE @ IDfy, Intern @Crio.Do,  @Innovaccer | Open Source Developer @ Gitlab | Full Stack Developer",
+            "public_repos": 42
+        },
+        {
+            "name": "Archeel Parekh",
+            "company": null,
+            "blog": "archeelparekh.ml",
+            "location": "Mumbai",
+            "email": "archeelparekh11@gmail.com",
+            "hireable": null,
+            "bio": "VJTI '22 CE | Open Source Enthusiast | Full Stack developer | JAVASCRIPT | PYTHON",
+            "public_repos": 34
+        },
+        {
+            "name": "Purvil Jain",
+            "company": null,
+            "blog": "https://purviljain.github.io/",
+            "location": "Mumbai",
+            "email": "jainpurvil98@gmail.com",
+            "hireable": null,
+            "bio": "Full stack Developer | Machine Learning | Deep Learning | Computer Vision",
+            "public_repos": 28
+        },
+        {
+            "name": "Shubham Arutwar",
+            "company": null,
+            "blog": "shubhamarutwar.online",
+            "location": "Mumbai, Maharahsra",
+            "email": "shubhamarutwar23@gmail.com",
+            "hireable": null,
+            "bio": "Full Stack Web Developer | Java, SpringBoot, SQL, Python",
+            "public_repos": 30
+        },
+        {
+            "name": "Swati Jadhav",
+            "company": null,
+            "blog": "https://about.me/swatijadhav",
+            "location": "Mumbai, India",
+            "email": "swati@kiprosh.com",
+            "hireable": null,
+            "bio": "Full-stack developer | \r\nLove to work using ROR, Ruby, Python JavaScript",
+            "public_repos": 22
+        },
+        {
+            "name": "Tejas Bhosale",
+            "company": null,
+            "blog": "http://www.tejasbhosale.in/",
+            "location": "Mumbai, India",
+            "email": "bhosaletejas93@gmail.com",
+            "hireable": null,
+            "bio": "Full stack Developer (MERN),\r\nGame Developer (Unity, Unreal)",
+            "public_repos": 45
+        },
+        {
+            "name": "Aniket Pai",
+            "company": "Cimpress India",
+            "blog": "",
+            "location": "Mumbai",
+            "email": "paianiket4@gmail.com",
+            "hireable": true,
+            "bio": "Full Stack Software Developer",
+            "public_repos": 19
+        },
+        {
+            "name": "Riday \u2661",
+            "company": null,
+            "blog": "https://riday.me/",
+            "location": "Mumbai, Maharastra, India",
+            "email": "iam@riday.me",
+            "hireable": null,
+            "bio": "\ud83d\udcbb I'm a Full Stack Developer (MERN)\r\n\u2728 Currently learning UX Designing.",
+            "public_repos": 24
+        },
+        {
+            "name": null,
+            "company": "@GEP-GitHub",
+            "blog": "https://www.amitk.co.in",
+            "location": "Mumbai, India",
+            "email": "me@amitk.co.in",
+            "hireable": true,
+            "bio": "Full Stack Developer, Blogger, Content Creator & Tech Enthusiast \ud83d\udc99\ud83d\udcbb\ud83d\udcf1",
+            "public_repos": 19
+        },
+        {
+            "name": "Amit Upadhyay",
+            "company": null,
+            "blog": "https://www.linkedin.com/in/upadhyayamitk",
+            "location": "mumbai",
+            "email": "amitu2016@gmail.com",
+            "hireable": true,
+            "bio": "Studied Electronics Engineering at Pune University.\r\nFull Stack Java Developer",
+            "public_repos": 188
+        },
+        {
+            "name": "Mayank Chotaliya",
+            "company": "Rezofin",
+            "blog": "linkedin.com/in/mayank-chotaliya-36008a1b6",
+            "location": "Mumbai, India",
+            "email": "mayankchotaliya2001@gmail.com",
+            "hireable": null,
+            "bio": "Full Stack Developer | React.js | MERN |  AWS | Serverless Framework | C++ |\r\n",
+            "public_repos": 45
+        },
+        {
+            "name": null,
+            "company": null,
+            "blog": "https://my-portfolio-swapnil-patil.netlify.app/",
+            "location": "Navi Mumbai, India",
+            "email": "swapnilpatil2607@gmail.com",
+            "hireable": null,
+            "bio": "Full Stack Web Developer",
+            "public_repos": 35
+        },
+        {
+            "name": "Neel Dedhia",
+            "company": "media.net",
+            "blog": "neeldedhia.bio.link",
+            "location": "Andheri East, Mumbai, India",
+            "email": "neeldedhia@gmail.com",
+            "hireable": true,
+            "bio": "Full Stack Web developer",
+            "public_repos": 12
+        },
+        {
+            "name": "Mahesh Goheja",
+            "company": null,
+            "blog": "msgoheja.com",
+            "location": "Mumbai",
+            "email": "msgoheja@gmail.com",
+            "hireable": null,
+            "bio": "Senior Full Stack #Developer",
+            "public_repos": 6
+        },
+        {
+            "name": "Nikhil",
+            "company": "Infiny Webcom Pvt Ltd",
+            "blog": "",
+            "location": "mumbai",
+            "email": "nikpat1988@gmail.com",
+            "hireable": true,
+            "bio": "CTO | Co-Founder | Full-Stack Developer | Software Architect",
+            "public_repos": 33
+        },
+        {
+            "name": "Satish Aoudichya",
+            "company": null,
+            "blog": "https://www.linkedin.com/in/satish-aoudichya-2893421b3",
+            "location": "Mumbai",
+            "email": "aoudichyasatish@gmail.com",
+            "hireable": null,
+            "bio": "Full Stack Developer | Python | React",
+            "public_repos": 7
+        },
+        {
+            "name": "Pratik Gohil",
+            "company": null,
+            "blog": "",
+            "location": "Mumbai",
+            "email": "pr.tikgohil@gmail.com",
+            "hireable": true,
+            "bio": "Full Stack Web Developer \ud83d\udcbb",
+            "public_repos": 7
+        },
+        {
+            "name": "Rajendra Patta",
+            "company": "@browserstack",
+            "blog": "",
+            "location": "Mumbai, India",
+            "email": "rraj1709@gmail.com",
+            "hireable": null,
+            "bio": "Full-stack Developer with a focus on NodeJS.",
+            "public_repos": 16
+        },
+        {
+            "name": "abressiddique",
+            "company": "Fusion web Dynamics ",
+            "blog": "https://abressiddique.github.io/Abress-Portfolio/",
+            "location": "mumbai , india ",
+            "email": "abressiddique@gmail.com",
+            "hireable": null,
+            "bio": "\ud83d\udc4b Hey! I\u2019m Abres Siddique, a Full Stack Developer rocking the MERN stack and Next.js. Building cool, dynamic web apps is my jam.",
+            "public_repos": 168
+        },
+        {
+            "name": "Oren Bruno Coelho",
+            "company": "None",
+            "blog": "https://oren-portfolio.vercel.app/",
+            "location": "Agashi, virar west, Mumbai",
+            "email": "coelhomelini@gmail.com",
+            "hireable": null,
+            "bio": "Aspiring software developer, currently trying to master full stack web development, fluent in C,C++ and python.",
+            "public_repos": 43
+        },
+        {
+            "name": "Punit Gavali",
+            "company": "Fr. Conceicao Rodrigues College of Engineering",
+            "blog": "https://punit-portfolio.lovable.app/",
+            "location": "Mumbai",
+            "email": "punitgavali29@gmail.com",
+            "hireable": null,
+            "bio": "Full-stack adventurer | Coffee-driven developer | Turning caffeine into lines of code | Ctrl+S enthusiast | Constantly evolving \ud83c\udf31",
+            "public_repos": 29
+        },
+        {
+            "name": "Rohan Gawade",
+            "company": null,
+            "blog": "",
+            "location": "Kandivali (E) , Mumbai 400101",
+            "email": "rohangawade2604@gmail.com",
+            "hireable": null,
+            "bio": "Aspirant Full Stack Developer\ud83d\udc68\u200d\ud83d\udcbb Learning MERN Stack at Nettech India\ud83d\udcbb || HTML || CSS || JavaScript || React || Redux",
+            "public_repos": 18
+        },
+        {
+            "name": "Aquib Khan",
+            "company": null,
+            "blog": "https://aquib-ak.vercel.app",
+            "location": "Thane, Mumbai, Maharashtra, India",
+            "email": "aquibk580@gmail.com",
+            "hireable": true,
+            "bio": "Full Stack Web Developer | Nextjs | TypeScript | Reactjs | Nodejs | Expressjs | mongoDB",
+            "public_repos": 42
+        },
+        {
+            "name": "Vijay Mourya",
+            "company": null,
+            "blog": "",
+            "location": "Navi Mumbai",
+            "email": "vijaymourya28@gmail.com",
+            "hireable": null,
+            "bio": "Software Development Engineer - Full Stack Developer",
+            "public_repos": 17
+        },
+        {
+            "name": "Saurabh",
+            "company": null,
+            "blog": "",
+            "location": "Mumbai",
+            "email": "1saurabh.desai@gmail.com",
+            "hireable": true,
+            "bio": "Full-stack developer, currently working on Nextjs, Nodejs, Gen AI & Web3 projects\r\n\r\nProficient in TypeScript & Python",
+            "public_repos": 28
+        },
+        {
+            "name": "Hamza Shaikh",
+            "company": null,
+            "blog": "https://hamzashaikh.netlify.app/",
+            "location": "Mumbai",
+            "email": "shaikh.hamza1199@gmail.com",
+            "hireable": true,
+            "bio": "I am a Full Stack Web Developer with React.js , React Hooks , Redux , Express.js, Node.js and MongoDB as my technical stack",
+            "public_repos": 52
+        },
+        {
+            "name": "Harshal Singh",
+            "company": null,
+            "blog": "https://harshal-singh.vercel.app/",
+            "location": "Mumbai",
+            "email": "dharma3136@gmail.com",
+            "hireable": null,
+            "bio": "\ud83d\udc68\u200d\ud83d\udcbb Full Stack Software Developer \r\n<br />\r\n\u2764 UI & Graphic Designer",
+            "public_repos": 9
+        },
+        {
+            "name": "Anmol Verma",
+            "company": null,
+            "blog": "",
+            "location": "Mumbai, IN",
+            "email": "cooleasycodebyanmol@gmail.com",
+            "hireable": true,
+            "bio": "Aspiring Full Stack Developer\r\n\r\n",
+            "public_repos": 42
+        },
+        {
+            "name": "Darshan Rajput",
+            "company": null,
+            "blog": "",
+            "location": "Mumbai, India",
+            "email": "rajputdarshanashok@gmail.com",
+            "hireable": true,
+            "bio": "Full Stack Web Developer",
+            "public_repos": 35
+        },
+        {
+            "name": "Yash Salian",
+            "company": "https://www.yashsalian.com/",
+            "blog": "https://www.linkedin.com/in/yash-salian-0b9818153",
+            "location": "Mumbai",
+            "email": "yashjsalian23@gmail.com",
+            "hireable": null,
+            "bio": "\r\n    Full stack developer (NodeJs | React |  MERN | MySQL | Angular | NextJs )\r\n",
+            "public_repos": 31
+        },
+        {
+            "name": "Priyanka Panjabi",
+            "company": null,
+            "blog": "",
+            "location": "Mumbai, India",
+            "email": "priyanka.panjabi88@gmail.com",
+            "hireable": true,
+            "bio": "UI developer | Learning Full Stack Development\r\nSoftware Developer -Wipro Ltd. | Ex-Reliance Jio Infocomm. Ltd ",
+            "public_repos": 12
+        },
+        {
+            "name": "Anand Shukla",
+            "company": null,
+            "blog": "https://anand-shukla.netlify.app/",
+            "location": "Mumbai, India",
+            "email": "anandshukla.web@gmail.com",
+            "hireable": null,
+            "bio": "A Passionate Full Stack Developer | MERN Stack | Programmer ",
+            "public_repos": 35
+        },
+        {
+            "name": "Abhishek Vishwakarma",
+            "company": "Capgemini Technologies Pvt. Ltd.",
+            "blog": "riosant.github.io",
+            "location": "Mumbai, India",
+            "email": "santasabhishek@gmail.com",
+            "hireable": true,
+            "bio": "An Undisciplined Full Stack Developer.",
+            "public_repos": 8
+        },
+        {
+            "name": "Rawal Suthar",
+            "company": "Consectus Limited",
+            "blog": "suthar.dev",
+            "location": "Mumbai",
+            "email": "rawal@suthar.dev",
+            "hireable": true,
+            "bio": "Full Stack Developer",
+            "public_repos": 2
+        },
+        {
+            "name": "Rohit Utekar",
+            "company": null,
+            "blog": "",
+            "location": "Mumbai, India",
+            "email": "rohit.utekar007@gmail.com",
+            "hireable": true,
+            "bio": "Full stack developer",
+            "public_repos": 18
+        },
+        {
+            "name": "Pratibha Waghmare",
+            "company": null,
+            "blog": "",
+            "location": "Navi Mumbai",
+            "email": "pratibha.waghmare211@gmail.com",
+            "hireable": null,
+            "bio": "Full Stack Developer",
+            "public_repos": 16
+        },
+        {
+            "name": "Nihal Yadav",
+            "company": null,
+            "blog": "",
+            "location": "Mumbai",
+            "email": "nihal7388326251@gmail.com",
+            "hireable": null,
+            "bio": "Full Stack Developer |\r\nMERN Stack Developer\r\n",
+            "public_repos": 14
+        },
+        {
+            "name": "Arvin",
+            "company": null,
+            "blog": "",
+            "location": "Navi Mumbai",
+            "email": "arvin09@gmail.com",
+            "hireable": null,
+            "bio": "Expert JavaScript full stack developer. Experienced in developing scalable and performent javascript applications",
+            "public_repos": 54
+        },
+        {
+            "name": "Vivek Dogra",
+            "company": "@credr",
+            "blog": "",
+            "location": "Mumbai",
+            "email": "vivek.dogra.iitd@gmail.com",
+            "hireable": null,
+            "bio": "- Worked as a full stack developer @paypal for close to 3 years\r\n- Moved to a startup @credr a used automobiles marketplace. ",
+            "public_repos": 27
+        },
+        {
+            "name": "Sayyad Ali Khan",
+            "company": null,
+            "blog": "",
+            "location": "Mumbai",
+            "email": "sayyadali40@gmail.com",
+            "hireable": true,
+            "bio": "Full Stack Developer\r\n\r\nSkills - Javascript, AngularJS, NodeJS, JAVA, MEAN",
+            "public_repos": 14
+        },
+        {
+            "name": "Rohan Patil",
+            "company": null,
+            "blog": "",
+            "location": "Mumbai",
+            "email": "rohanbpatil77@gmail.com",
+            "hireable": null,
+            "bio": "Full Stack Developer |\r\nPHP | JS | NodeJS | Apigee ",
+            "public_repos": 8
+        },
+        {
+            "name": null,
+            "company": "codalyze",
+            "blog": "",
+            "location": "Mumbai",
+            "email": "rakeshlahre830@gmail.com",
+            "hireable": null,
+            "bio": "Full stack developer @codalyze Nodejs, VueJs, Postgres, Redis, Mongo, Machine Learning",
+            "public_repos": 9
+        },
+        {
+            "name": "Manoj Mondal",
+            "company": "Mars - International",
+            "blog": "https://manojmondal.in/",
+            "location": "Mumbai",
+            "email": "manojmondal9834@gmail.com",
+            "hireable": null,
+            "bio": "Hi I'm a Full-stack developer ",
+            "public_repos": 30
+        },
+        {
+            "name": "BANEGAR HUZAIFA",
+            "company": "botpresso",
+            "blog": "https://www.linkedin.com/in/huzaifabanegar",
+            "location": "Mumbai",
+            "email": "banegarhuzzi1010@gmail.com",
+            "hireable": null,
+            "bio": "\ud83c\udf1f Full Stack Developer with 3+ years of experience in Java, JavaScript, TypeScript,Next Js, MERN and SpringBoot ",
+            "public_repos": 19
+        },
+        {
+            "name": "Sunil Singh",
+            "company": null,
+            "blog": "",
+            "location": "Mumbai",
+            "email": "sunilsingh1999@gmail.com",
+            "hireable": null,
+            "bio": "Full Stack Python Developer",
+            "public_repos": 14
+        },
+        {
+            "name": "Sujal Kesharwani",
+            "company": null,
+            "blog": "https://childish.vercel.app/",
+            "location": "Mumbai, India",
+            "email": "sujalkesharwani220@gmail.com",
+            "hireable": true,
+            "bio": "Hi, I'm Sujal Kesharwani, a full stack developer with experience in building scalable web apps using modern technologies. I'm always curious and excited",
+            "public_repos": 40
+        },
+        {
+            "name": "Chinmay S",
+            "company": null,
+            "blog": "www.chinmay.space",
+            "location": "Mumbai , India",
+            "email": "chinmayinbox8@gmail.com",
+            "hireable": true,
+            "bio": "I am a full-stack developer with expertise in React, Node, MongoDB, Express, Tailwind, and TypeScript. space-tech enthusiast",
+            "public_repos": 66
+        },
+        {
+            "name": "Roshith Prakash",
+            "company": null,
+            "blog": "roshithprakash.vercel.app",
+            "location": "Mumbai, India",
+            "email": "roshithprakash07@gmail.com",
+            "hireable": true,
+            "bio": "Full-stack developer crafting thoughtful web products with clean code. Always learning, always coding. \ud83d\ude80",
+            "public_repos": 21
+        },
+        {
+            "name": "Ms Fiza",
+            "company": null,
+            "blog": "",
+            "location": "Mumbai",
+            "email": "fizaansari667789@gmail.com",
+            "hireable": null,
+            "bio": "\ud83c\udf10 Full Stack Developer in the making | \ud83d\udcbb HTML \u2022 CSS \u2022 JS \u2022 React \u2022 Node.js | \ud83d\ude80 Learning by building",
+            "public_repos": 4
+        },
+        {
+            "name": "Nitin Singh",
+            "company": "Freelancer",
+            "blog": "",
+            "location": "Mumbai",
+            "email": "nitin.singh7570@gmail.com",
+            "hireable": true,
+            "bio": "Full Stack Developer, Freelancer.",
+            "public_repos": 10
+        },
+        {
+            "name": "Chetan Narendra Patil",
+            "company": null,
+            "blog": "https://chetn11.github.io/",
+            "location": "Mumbai",
+            "email": "cnpatil00@gmail.com",
+            "hireable": null,
+            "bio": "I'm a full-stack web developer with expertise in MERN stack. Proficient in React, Redux, MongoDB, Express, Node.js, and more.",
+            "public_repos": 49
+        },
+        {
+            "name": "Danish Galiyara",
+            "company": null,
+            "blog": "",
+            "location": "mumbai,india",
+            "email": "galiyaradanish@yahoo.com",
+            "hireable": true,
+            "bio": "A Full Stack Developer by Passion and Profession with years of experience in I.T. industry, having expertise in handling large data & load on system.",
+            "public_repos": 12
+        },
+        {
+            "name": "Ravi Jaisawal",
+            "company": "Quantiphi Analytics Solution Private Limited",
+            "blog": "https://www.quantiphi.com/",
+            "location": "Mumbai, India",
+            "email": "j.ravi786@gmail.com",
+            "hireable": true,
+            "bio": "Full Stack Web Developer || Ex-Fynd  || Ex-BookMyShow\r\n\r\n(Node.js || Python ||  React.js || Angular 6 )\r\n",
+            "public_repos": 27
+        },
+        {
+            "name": "Ritik Mota",
+            "company": null,
+            "blog": "",
+            "location": "Mumbai",
+            "email": "ritikpmota@gmail.com",
+            "hireable": null,
+            "bio": "Hello there, I'm a 21 year old Computer Engineering student from D.J Sanghvi CoE. I'm a full-stack Django developer and an aspiring Data Analyst.",
+            "public_repos": 15
+        },
+        {
+            "name": null,
+            "company": null,
+            "blog": "",
+            "location": "Mumbai, Maharashtra, India ",
+            "email": "raza.ansari.4364@gmail.com",
+            "hireable": null,
+            "bio": "MERN Stack Developer | Frontend Development \u2705 | Currently learning Backend & Full-Stack Development",
+            "public_repos": 20
+        },
+        {
+            "name": "Shaaz Khan",
+            "company": null,
+            "blog": "https://www.linkedin.com/in/shaaz-khan-b3aa8b171",
+            "location": "Mumbai",
+            "email": "shaazkhan153@gmail.com",
+            "hireable": true,
+            "bio": "Hello, I am full stack React Native Developer with 5 years of exp. I post some of my codes here for version management and also to contribute to open source.",
+            "public_repos": 55
+        },
+        {
+            "name": "Jay Kesarkar",
+            "company": null,
+            "blog": "https://dev-portfolio-jay.netlify.app/",
+            "location": "Mumbai, India",
+            "email": "kesarkarjay9@gmail.com",
+            "hireable": true,
+            "bio": "Full-Stack Developer | UI UX | DevOps & Cloud Enthusiast ",
+            "public_repos": 15
+        },
+        {
+            "name": "Vishnu Rai",
+            "company": "Accenture",
+            "blog": "",
+            "location": "Mumbai",
+            "email": "vishnunarayan1670@gmail.com",
+            "hireable": null,
+            "bio": "Hey There, I am a Full-stack Developer @Javascript/typescript Development.",
+            "public_repos": 26
+        },
+        {
+            "name": "Dhananjay Gadakh",
+            "company": null,
+            "blog": "",
+            "location": "Vashi, Navi Mumbai, Maharashtra, India",
+            "email": "gadakh.dhananjay3@gmail.com",
+            "hireable": true,
+            "bio": "Full Stack Developer!!!\r\nLearner for life...",
+            "public_repos": 8
+        },
+        {
+            "name": "Prathamesh Ghadge",
+            "company": "Student",
+            "blog": "pratham-ghadge-portfolio.vercel.app",
+            "location": "Mumbai",
+            "email": "prathamtech24@gmail.com",
+            "hireable": null,
+            "bio": "\ud83d\udc4b Hi, I\u2019m Prathamesh Ghadge\r\n\ud83d\ude80 Passionate Full-Stack Developer | \ud83d\udccd Pune / Mumbai, India",
+            "public_repos": 13
+        },
+        {
+            "name": "Rohit Bhilare",
+            "company": "Tech Mahindra",
+            "blog": "",
+            "location": "Mumbai",
+            "email": "rohit.bhilare03@gmail.com",
+            "hireable": null,
+            "bio": "Full stack developer \ud83d\udc4d  Like to explore new things.",
+            "public_repos": 15
+        },
+        {
+            "name": "Rahul Patil",
+            "company": null,
+            "blog": "",
+            "location": "KoparKhairane, Navi Mumbai",
+            "email": "rahulrohidaspatil@gmail.com",
+            "hireable": true,
+            "bio": "Full Stack Web Developer (NodeJS)\r\nAndroid App Developer (Jetpack Compose)",
+            "public_repos": 12
+        },
+        {
+            "name": "omkar-devkar-921",
+            "company": null,
+            "blog": "",
+            "location": "MUMBAI",
+            "email": "88omkardevkar@gmail.com",
+            "hireable": null,
+            "bio": "Full Stack Developer ( java )",
+            "public_repos": 5
+        },
+        {
+            "name": "Pournima More",
+            "company": "Karmaveer Bhaurao Patil College, Vashi",
+            "blog": "https://www.linkedin.com/in/pournimamore",
+            "location": "Vashi,Navi Mumbai",
+            "email": "morepournima2004@gmail.com",
+            "hireable": null,
+            "bio": "\ud83c\udf93CS Graduate | \ud83d\udcbbAspiring Full Stack Developer (JS, HTML, CSS, Python) | Exploring \ud83d\udccaPower BI &\ud83e\udd16 AI | \ud83d\udd01Agile Learner | \ud83d\udcbcOpen to Opportunities",
+            "public_repos": 19
+        },
+        {
+            "name": "Pranoy Premlal",
+            "company": null,
+            "blog": "",
+            "location": "Mumbai,India",
+            "email": "pranoy.programmer@gmail.com",
+            "hireable": true,
+            "bio": "Software Engineer | Full Stack Developer |\r\nReactJs | Angular | Nodejs ",
+            "public_repos": 9
+        },
+        {
+            "name": "Vishal Yelve",
+            "company": null,
+            "blog": "https://in.linkedin.com/in/vishal-yelve-8b40a922",
+            "location": "Mumbai",
+            "email": "vishal_yelve@hotmail.com",
+            "hireable": null,
+            "bio": "Technical Architect | Sr. Tech Lead | Sr. Full Stack Developer working on Web Technology ( C#, Angular, .Net Core, MVC, WEB API, EF Core,  SQL Server, Azure)",
+            "public_repos": 15
+        },
+        {
+            "name": "Swapnil Chavre",
+            "company": null,
+            "blog": "",
+            "location": "Mumbai",
+            "email": "swapnilchavre7974@gmail.com",
+            "hireable": null,
+            "bio": "Goal to be a Full Stack Developer.",
+            "public_repos": 7
+        },
+        {
+            "name": "KHALID SHAIKH",
+            "company": null,
+            "blog": "",
+            "location": "MUMBAI",
+            "email": "ks0903525@gmail.com",
+            "hireable": null,
+            "bio": "Full-stack developer crafting clean, responsive, and scalable web apps using React, Node.js, Tailwind CSS & more. Focused on great UX & performance.",
+            "public_repos": 21
+        },
+        {
+            "name": "Mihir Koyande",
+            "company": null,
+            "blog": "",
+            "location": "Mumbai,Maharashtra,India",
+            "email": "koyandemihir@gmail.com",
+            "hireable": null,
+            "bio": "Full Stack Web Developer",
+            "public_repos": 3
+        },
+        {
+            "name": "Amey Zope",
+            "company": null,
+            "blog": "",
+            "location": "Mumbai",
+            "email": "ameymilind@gmail.com",
+            "hireable": null,
+            "bio": "Full Stack Developer | Mobile App Developer | Aspiring Computer Engineer | Tech Enthusiast\r\n",
+            "public_repos": 7
+        },
+        {
+            "name": "Shivam Upadhyay",
+            "company": null,
+            "blog": "",
+            "location": "Mumbai",
+            "email": "shivamupadhyaylnct@gmail.com",
+            "hireable": null,
+            "bio": "Full stack Developer (MERN)  @Bixware_Technology_Pvt_Ltd.",
+            "public_repos": 6
+        },
+        {
+            "name": "Ajit Gavade",
+            "company": null,
+            "blog": "",
+            "location": "Mumbai, India",
+            "email": "ajitgavade2004@gmail.com",
+            "hireable": null,
+            "bio": "Full-stack web developer | React & Node.js | MongoDB\r\nFocused on clean code, real-world projects, and growth.",
+            "public_repos": 7
+        },
+        {
+            "name": "Jayesh singh",
+            "company": null,
+            "blog": "",
+            "location": "Mumbai India ",
+            "email": "js807583@gmail.com",
+            "hireable": null,
+            "bio": "\ud83d\udc4b Hi, I'm Jayesh Singh\r\nFull Stack MERN Developer ",
+            "public_repos": 8
+        },
+        {
+            "name": "Muzammil Ahmed",
+            "company": "Student",
+            "blog": "",
+            "location": "Mumbai,India",
+            "email": "ahmedmuzammil2308@gmail.com",
+            "hireable": true,
+            "bio": "An aspiring Full-stack developer!",
+            "public_repos": 3
+        },
+        {
+            "name": "Samkit Shah",
+            "company": null,
+            "blog": "",
+            "location": "Mumbai",
+            "email": "samkitshah.nmims@gmail.com",
+            "hireable": true,
+            "bio": "Full Stack JavaScript developer. \r\nHave used React, React-Native, NodeJs, Redux and much more.",
+            "public_repos": 13
+        },
+        {
+            "name": "Ravi Mourya",
+            "company": null,
+            "blog": "",
+            "location": "Mumbai , Maharashtra ",
+            "email": "ravimourya0604@gmail.com",
+            "hireable": true,
+            "bio": "Full Stack Developer ",
+            "public_repos": 2
+        },
+        {
+            "name": "Amit pandey",
+            "company": null,
+            "blog": "",
+            "location": "Mumbai",
+            "email": "amitvedprakashpandey@gmail.com",
+            "hireable": null,
+            "bio": "Fresher Full Stack Developer | React | Express js | MySQL | Tailwind css | Firebase | HTML | CSS | Javascript ",
+            "public_repos": 13
+        },
+        {
+            "name": "Nitin Sachdev ",
+            "company": "Fork Media Pvt Ltd.",
+            "blog": "",
+            "location": "Mumbai, Maharashtra",
+            "email": "sachdevnitin19@gmail.com",
+            "hireable": true,
+            "bio": "I am an avid Full Stack Developer seeking job at product based company. I am currently working as Software Engineer at Fork Media Pvt Ltd.",
+            "public_repos": 14
+        },
+        {
+            "name": "Ankush Dubey",
+            "company": "OSP Labs",
+            "blog": "",
+            "location": "Mumbai",
+            "email": "ankushdubey099@gmail.com",
+            "hireable": null,
+            "bio": "Full Stack Developer at OSP Labs Pvt. Ltd. | 3+ Years of Experience\r\nSkilled in ASP.NET Core, Angular, and SQL Server.",
+            "public_repos": 27
+        },
+        {
+            "name": "Aadarsh Maurya",
+            "company": null,
+            "blog": "",
+            "location": "Mumbai",
+            "email": "aadimaurya2000@gmail.com",
+            "hireable": true,
+            "bio": "\ud83d\udc4b Hi there! I'm Aadarsh Maurya,\r\n\ud83d\udd39 Full-Stack Developer | Freelancer\r\n\ud83d\udd39 Passionate about building responsive and user-friendly web applications",
+            "public_repos": 8
+        },
+        {
+            "name": "Arun Singh",
+            "company": null,
+            "blog": "",
+            "location": "Mumbai",
+            "email": "singh.arun183@gmail.com",
+            "hireable": true,
+            "bio": "I am a full stack developer and have a growing interest in machine learning.",
+            "public_repos": 9
+        },
+        {
+            "name": "Muneender Doosa",
+            "company": "The WebDepot",
+            "blog": "thewebdepot.in",
+            "location": "Mumbai",
+            "email": "muneenderd@gmail.com",
+            "hireable": null,
+            "bio": "Full Stack Developer (Mobile & Web)",
+            "public_repos": 2
+        },
+        {
+            "name": "Achal Saxena",
+            "company": null,
+            "blog": "",
+            "location": "Mumbai",
+            "email": "achalsaxena44@gmail.com",
+            "hireable": true,
+            "bio": "Full-stack developer (PHP/Laravel, HTML, Tailwind, JS) with 6+ yrs govt IT experience. Built scalable apps & CMS sites. Based in Mumbai, India.",
+            "public_repos": 29
+        },
+        {
+            "name": "Sandeep Sirodia",
+            "company": "Prodigal Tech",
+            "blog": "https://www.prodigaltech.com",
+            "location": "Mumbai",
+            "email": "sandeep.sirodia@prodigaltech.com",
+            "hireable": null,
+            "bio": "IIT Bombay Alum | Full Stack Developer at Prodigal (YC, Accel, Menlo) ",
+            "public_repos": 5
+        },
+        {
+            "name": "Siddhi Parkar",
+            "company": "Morgan Stanley",
+            "blog": "",
+            "location": "Mumbai",
+            "email": "siddhiparkar15@gmail.com",
+            "hireable": true,
+            "bio": "A passionate developer who loves to solve scathing issues of real world software. \r\nAdept at Data Structures and Algorithms.\r\nA Full Stack Developer.",
+            "public_repos": 16
+        },
+        {
+            "name": "Harshal Vilas Ahirrao",
+            "company": "Learning & Building Daily \ud83d\udcbb",
+            "blog": "https://my-portfolio-harshal.vercel.app/",
+            "location": "India \ud83c\udf0d | Mumbai\ud83c\udfe2",
+            "email": "harshal.mywork5@gmail.com",
+            "hireable": null,
+            "bio": "Full Stack Developer \ud83d\udcbb | Crafting high-speed, user-friendly web experiences \u26a1  \r\nPassionate about clean code, beautiful UI & seamless UX.  \r\nBringing ideas to ",
+            "public_repos": 22
+        },
+        {
+            "name": "Radhika Dalvi",
+            "company": null,
+            "blog": "radhikadalvi.com",
+            "location": "Mumbai, India",
+            "email": "radhikadalvi01@gmail.com",
+            "hireable": null,
+            "bio": "\ud83d\ude80 Full-Stack Developer | \ud83d\udcbb Tech Enthusiast | \ud83d\udd0d Solving Problems One Line of Code at a Time |",
+            "public_repos": 9
+        },
+        {
+            "name": "Jagruti Malani",
+            "company": "BNP Paribas",
+            "blog": "",
+            "location": "Mumbai, India",
+            "email": "jagruti.pmalani@gmail.com",
+            "hireable": null,
+            "bio": "Full stack developer at BNP Paribas, India.",
+            "public_repos": 2
+        },
+        {
+            "name": "Nidhi Mahajan",
+            "company": null,
+            "blog": "",
+            "location": "Mumbai",
+            "email": "mahajannidhi70@gmail.com",
+            "hireable": null,
+            "bio": "MCA Graduate | Full Stack Developer \r\n| Crafting clean, responsive, and user-friendly web\u00a0solutions\u00a0\ud83c\udf10\u2728\r\n",
+            "public_repos": 6
+        }
+    ]
+}

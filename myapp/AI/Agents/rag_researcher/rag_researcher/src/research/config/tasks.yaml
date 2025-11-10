@@ -1,0 +1,66 @@
+synthesize_task:
+  description: >
+    You are responsible for generating the final, polished response to the user's research query: '{query}'.
+
+    You will be given:
+    - Extracted content from a local document (from the pdf_task)
+    - Up-to-date findings from the web (from the web_task)
+
+    Your job is to:
+    - Compare and synthesize both inputs
+    - Cross-reference for consistency
+    - Summarize the most important, relevant, and verified information
+    - Make the answer actionable and easy to understand
+
+    If the two sources contradict each other, prioritize web results **only if they come from a reputable source** (e.g. news orgs, official websites).
+    
+    If one source is empty (e.g., web had no results), use only the one that returned content.
+    source
+  expected_output: >
+    A clear, final answer that directly addresses the query and is supported by both the document and online research.
+
+    Format it as a short report with:
+    - A summary (2–3 sentences)
+    - Supporting insights from the document
+    - Supporting insights from the web
+    - Mention of any discrepancy or limitations if relevant
+
+    Example Output:
+
+    "Summary: The company's revenue in 2023 was strong, driven by increased exports.
+
+    From the PDF: The income statement shows $18.5M in revenue for 2023 (+6% YoY).
+
+    From the Web: According to Reuters, the revenue growth was driven by expansion into Europe.
+
+    No major discrepancies found."
+    
+  agent: research_coordinator
+
+  input_map:
+    pdf_output: pdf_task
+    web_output: web_task
+    query: query
+
+knowledge_task:
+  description: >
+    You are provided with a **single source of information** — this may be a PDF filea, website.
+
+    Your task is to:
+    1. **Detect and mention** what kind of source was provided: "{source}"
+    2. Understand the research **question** from the user: "{query}"
+    3. Use your tools (e.g., RAGTool) to search through the loaded content
+    4. Extract the **most relevant and factual information** that helps answer the question
+    5. Present the response in a **clear, structured, and helpful format**
+
+    You must **never fabricate** information. If the source does not provide a sufficient answer, clearly say so.
+
+    Assume that the content has already been loaded and is ready to be queried.
+
+  expected_output: >
+    - A concise and structured answer to the question: "{query}"
+    - A sentence identifying the type of content used (e.g., "This answer is based on a YouTube video titled..." or "This response comes from the provided PDF document...")
+    - Relevant quotes, bullet points, or facts from the source that support your answer
+    - If the content was not sufficient to answer the question, explicitly state that and explain why
+
+  agent: knowledge_expert

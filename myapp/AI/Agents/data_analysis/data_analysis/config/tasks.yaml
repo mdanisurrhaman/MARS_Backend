@@ -1,0 +1,176 @@
+load_user_data_task:
+  description: >
+    CRITICAL FIRST STEP: Load the dataset from the provided file path: {file_path}.
+    
+    MANDATORY ACTIONS:
+    1. Use the `load_user_data` tool with the exact file path provided
+    2. Automatically detect file type (CSV, JSON, or Excel) 
+    3. Load dataset with appropriate parsing parameters
+    4. Validate the loaded data (check shape, preview first few rows)
+    5. Save the dataset to: data/raw_data.csv
+    6. Provide clear status report including shape and column names
+    
+    FAILURE HANDLING:
+    If loading fails, return immediately with detailed error message:
+    "TASK FAILED: Dataset could not be loaded from {file_path}. Error: [specific error]"
+    
+    SUCCESS CRITERIA:
+    - Dataset loaded successfully
+    - Saved to data/raw_data.csv
+    - Shape and basic info reported
+
+  expected_output: >
+    DATASET LOADING REPORT:
+    ========================
+    File Path: {file_path}
+    File Type Detected: [CSV/JSON/Excel]
+    Loading Status: SUCCESS
+    Dataset Shape: [X rows, Y columns] 
+    Column Names: [list all columns]
+    Data Types: [brief summary]
+    File Saved To: data/raw_data.csv
+    
+    SAMPLE DATA PREVIEW:
+    [First 3 rows of actual data]
+
+  agent: data_loader
+
+preprocess_data_task:
+  description: >    
+    Use the preprocessing tool to automatically clean and prepare the decoded dataset.
+    
+    YOUR RESPONSIBILITIES:
+    1. Use the `preprocess_and_save_data` tool on data/raw_data.csv
+    2. The tool will automatically handle:
+       - Missing value imputation (numerical: mean/median, categorical: mode)
+       - Categorical variable encoding 
+       - Datetime column conversion
+       - Data validation and transformation
+       - Saving to data/preprocessed_data.csv
+       - Generating column mapping files
+    3. Report what the tool accomplished
+    4. Confirm the decoded dataset is ready for analysis
+    
+    FAILURE HANDLING:
+    If preprocessing fails, return: "PREPROCESSING FAILED: [specific error details]"
+
+  expected_output: >
+    DATA PREPROCESSING REPORT:
+    ==========================
+    Source: data/raw_data.csv
+    Output: data/decoded.csv
+    
+    PREPROCESSING ACTIONS:
+    ======================
+    Missing Value Treatment:
+    - Numerical columns: [method used] for [column names]
+    - Categorical columns: [method used] for [column names]
+    - Rows/values affected: [counts]
+    
+    Feature Engineering:
+    - Datetime conversions: [column names converted]
+    - New features created: [if any]
+    
+    DATA QUALITY RESULTS:
+    =====================
+    Final Shape: [X rows, Y columns]
+    Missing Values Remaining: [count]
+    Data Types Finalized: [summary]
+    
+    FILES GENERATED:
+    - data/preprocessed_data.csv
+    - data/column_mappings.json (if applicable)
+    - data/datetime_mappings.json (if applicable)
+    - data/decoded.csv
+    
+    DATASET READY FOR ANALYSIS
+
+  agent: preprocesser
+
+
+analysis_task:
+  description: >
+    Perform comprehensive data analysis based on the user query: {query}
+    
+    Use the generate_and_execute_analysis tool to:
+    1. Execute the appropriate statistical analysis code
+    2. Extract meaningful patterns, trends, and correlations from the data
+    3. Provide detailed statistical summaries and key findings
+    4. Identify actionable insights that directly address the user's question
+    
+    Focus on delivering accurate, data-driven insights with supporting evidence 
+    from the analysis results. Ensure all findings are well-substantiated by 
+    the underlying data.
+  expected_output: >
+    A comprehensive analysis result containing:
+    - Execution status (success/error)
+    - Complete analysis code used for the computation
+    - Analysis results presented in structured DataFrame format
+    - Key statistical insights and business implications
+    - Data source and processing information
+    - Clear summary of findings that answer the user's query
+
+  agent: data_analyst_agent
+
+visualization_task:
+  description: >
+    Create effective data visualization based on the user query: {query}
+    
+    Use the generate_and_execute_visualization tool to:
+    1. Generate appropriate visualization code using the best-suited library
+    2. Create clear, informative visualizations (bar charts, line plots, heatmaps, etc.)
+    3. Save visualizations in multiple formats (HTML for interactivity, PNG for static)
+    4. Extract visual insights and patterns from the generated charts
+    
+    Choose the most suitable visualization type based on:
+    - Data characteristics (categorical, numerical, temporal)
+    - Query requirements (comparison, trend, distribution, correlation)
+    - Best practices for data presentation and clarity
+  expected_output: >
+    A complete visualization result containing:
+    - Execution status (success/error)
+    - Visualization code used for chart generation
+    - File paths to saved visualizations (HTML and PNG formats)
+    - Visual insights derived from the chart patterns
+    - Data source and preprocessing information
+    - Library used for visualization (Plotly, Matplotlib, or Seaborn)
+
+  agent: data_analyst_agent
+
+formatter_task:
+  description: >
+    Format the results from analysis and visualization tasks into clean, 
+    user-friendly output that follows specific formatting standards.
+    
+    For ANALYSIS results, format as:
+    - Code block containing the analysis code
+    - DataFrame results in readable table format
+    - Clean insights without unnecessary prefixes like "Here are the insights"
+    
+    For VISUALIZATION results, format as:
+    - Code block containing the visualization code
+    - Clear file paths for saved images/HTML files
+    - Clean insights without verbose prefixes
+    - Include data processing disclaimer about decoded data usage
+    
+    Remove redundant phrases and ensure professional presentation.
+    
+    Task type: "task_type"
+    Results to format: "task_results"
+  expected_output: >
+    Professional formatted output based on task type:
+    
+    For Analysis Tasks:
+    - Clean code block with analysis code
+    - Well-structured DataFrame results
+    - Concise, actionable insights
+    
+    For Visualization Tasks:
+    - Clean code block with visualization code
+    - File paths to generated visualizations
+    - Visual insights and patterns
+    - Data processing transparency disclaimer
+    
+    All outputs should be free of unnecessary prefixes and maintain 
+    professional presentation standards.
+  agent: result_formatter

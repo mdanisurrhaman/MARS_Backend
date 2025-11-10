@@ -1,0 +1,55 @@
+scoring_task:
+  description: >
+    Compare the following resume and job description texts.
+    Identify required skills and qualifications in the job description, and check for their presence in the resume.
+    Assign a numerical score from 1 to 100 representing the match level.
+    Strongly penalize any critical missing skills or qualifications.
+    Provide a brief explanation of your reasoning with specific examples.
+
+    Resume:
+    {resume}
+
+    Job Description:
+    {job_description}
+
+  expected_input: >
+    {
+      "resume": "str (Required). The extracted text content of the candidate's resume.",
+      "job_description": "str (Required). The extracted text content of the job description."
+    }
+
+  expected_output: >
+    A numerical score from 1 to 100.
+    Example: 75
+    Brief rationale citing which skills matched or were missing.
+
+  agent: scoring_agent
+
+feedback_task:
+  description: >
+    Based on the provided resume, job description, and match score, write a markdown feedback report.
+
+    Your report must include:
+
+    **Overall Summary:**  
+    A concise 50-70 word summary highlighting alignment and key gaps.
+
+    **Strengths:**  
+    List 3 to 5 bullet points identifying specific skills and experiences from the resume that match the job description.
+
+    **Areas for Improvement:**  
+    List 3 to 5 bullet points identifying precise skill gaps or missing qualifications, explaining their importance, and recommending concrete improvements.
+
+    Focus on clear, evidence-based feedback. Avoid repeating the full resume or job description.
+
+  expected_input: >
+    {
+      "resume": "str (Required). Extracted candidate resume text.",
+      "job_description": "str (Required). Extracted job description text.",
+      "score": "int (Required). The match score output by the scoring task."
+    }
+
+  expected_output: >
+    A clear, brief and professionally written report, also the score from the resume scorer output.
+
+  agent: feedback_agent

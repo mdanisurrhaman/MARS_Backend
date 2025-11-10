@@ -1,0 +1,296 @@
+#  This file defines the tasks for the decision support system.
+
+
+# This task is for extracting company names from user input and validating them.
+company_extractor_task:
+  description: >
+    Extract all company names from the user query {topic} and intelligently validate them.
+    
+    SMART VALIDATION RULES:
+    - Use fuzzy matching for typos (Nvidia = NVIDIA ✓)
+    - Recognize informal names (Google = Alphabet ✓) 
+    - Handle abbreviations (FB = Meta ✓)
+    - Only mark as invalid if clearly fictional or nonsense
+    
+    Be generous with validation - most user queries contain real companies even with typos.
+    
+    If companies are valid, list them under 'Valid Companies'.
+    If any company is clearly invalid (fictional), list under 'Invalid Companies'.
+    If ALL companies are valid, proceed with analysis.
+    If ANY company is clearly invalid, stop and ask for clarification.
+  expected_output: >
+    Output must be a list of companies
+    like valid_company : [Apple, Samsung, Microsoft, Google]
+    like invalid_company : [Banana]
+    message: Banana is an invalid company. Please enter valid company names.
+  agent: Company_extractor_agent
+
+
+# This task is for looking up stock ticker symbols for the provided company names.
+ticker_lookup_task:
+  description: >
+    # Use this task to find ticker symbols for the provided company names"
+    You will receive a list of company names. Your task is to find the correct stock ticker symbols for these companies.
+    If a company does not have a valid ticker symbol, you will indicate that it is not listed on the stock market.  
+    ➤ If a company is valid, return its ticker symbol.
+    ➤ If a company is not valid, return a message indicating it is not listed on the stock market.
+    Double-check each result using Yahoo Finance search if necessary.
+    If the yfinance gets failed to fetch the ticker symbol, llm will search for the ticker symbol of the companies.
+  expected_output: >
+    A list of valid ticker symbols for the input companies.
+    Format: 'Company - SYMBOL'
+    If any company name is invalid, return a message indicating it.
+  agent: Ticker_lookup_agent
+
+
+# # This task is for analyzing stock performance and retrieving current prices.
+stock_price_analyzer_task:
+  description: >
+    Use this task to conduct detailed research on companies, including their financials, news, and market performance.
+    You will be provided with a list of company names. Your task is to conduct detailed research on these companies,
+    including their financials, news, and market performance.
+       "1. Company basic information (name, sector, market cap)\n"
+        "2. Business summary\n"
+        "3. Latest news and developments\n"
+        "4. Key insights and potential implications"
+    ➤ If the company is valid, return its financials, news, and market performance.
+    ➤ If the company is not valid, return a message indicating it is not listed on the stock market.
+  expected_output: >
+    A comprehensive analysis showing 6-month performance and current prices for all stocks
+    A comprehensive report on each company with financials, news, and market performance.
+    A detailed company research report with all requested information, "
+    organized in a clear and professional format with actionable insights."
+    If the ticker symbol is not valid, return a message indicating it is not listed on the stock market.
+  agent: Stock_price_analyzer_agent
+
+
+# This task is for conducting detailed research on companies, including their financials, news, and market performance.
+company_researcher_task:
+  description: >
+    Use this task to conduct detailed research on companies, including their latest company news and provide sentiment insights.
+    You will be provided with a list of company names. Your task is to conduct detailed research on these companies,
+    including their latest company news and provide sentiment insights.
+    You will also analyze the sentiment of the news articles and provide insights on the overall sentiment of the company.
+    If the ticker symbol is not valid, return a message indicating it is not listed on the stock market.
+    ➤ If the company is valid, return its financials, news, and market performance.
+    ➤ If the company is not valid, return a message indicating it is not listed on the stock market.
+  expected_output: >
+    A detailed company research report with all requested information, organized in a clear and professional format with actionable insights.
+    If the ticker symbol is not valid, return a message indicating it is not listed on the stock market.
+  agent: Company_researcher_agent
+
+
+# This task is for visualizing stock price trends and patterns.
+chart_visualization_task:
+  description: >
+    Create comprehensive stock price visualizations for the analyzed companies. 
+    Generate interactive charts showing:
+    
+    1. **6-month price trend charts** - Line charts showing price movements over 6 months
+    2. **Performance comparison charts** - Normalized percentage change comparison between companies
+    
+    Use the stock symbols identified in previous tasks. Create multiple chart types 
+    to provide comprehensive visual analysis. Ensure all charts are professional, 
+    interactive, and saved as HTML files that can be easily shared.
+    
+    Focus on creating charts that clearly show:
+    - Price trends and patterns
+    - Relative performance between companies
+    - Trading volume insights
+    - Support and resistance levels (in candlestick charts)
+  expected_output: >
+    A comprehensive set of interactive Plotly charts including:
+    1. **Line Chart**: 6-month price trends for all companies
+  
+    Chart should be saved as an HTML file with descriptive filenames. 
+    Provide a summary of key visual insights discovered from the charts, 
+    including trend directions, volatility patterns, and relative performance observations.
+    
+    **Output Format:**
+    - Chart creation status and filenames
+    - Key visual insights and patterns identified
+
+    also provide the path to the saved HTML files for chart.
+  agent: Chart_visualizer_agent
+
+
+# This task is for combining market data, technical analysis, news sentiment, and visualization insights to produce a final investment decision report.
+decision_support_task:
+  description: >
+    You are the Final Investment Decision Analyst. You receive comprehensive data from previous agents:
+    
+    INPUT DATA YOU WILL RECEIVE:
+    1. Company name and ticker symbol
+    2. Current stock price and recent performance data
+    3. Market cap and 52-week trading range
+    4. Technical analysis (MA20, MA50, trend direction)
+    5. News headlines and sentiment analysis scores
+    6. Chart visualization file reference
+    7. Volume analysis and trading patterns
+    
+    CRITICAL INSTRUCTIONS:
+    - If any data is missing, explicitly state "Data not available" instead of using placeholders
+    - Calculate percentage changes accurately using provided price data
+    - Use actual dates (today's date for analysis)
+    - Reference the actual chart file name generated
+    - Sentiment indicators: Bearish, Somewhat-Bearish, Neutral, Somewhat-Bullish, Bullish 
+    - Provide clear buy/hold/sell reasoning
+    - Provide **DECISION SUMMARY TABLE** at the end even after there will be 2 or more then 2 companies
+
+    REQUIRED OUTPUT FORMAT (follow exactly):
+    
+    # INVESTMENT DECISION REPORT
+    **Analysis Date:** {current_date} | **Analyst:** AI Decision Support Crew
+    
+    ---
+    
+    ## EXECUTIVE SUMMARY
+    **Company:** [company_name] ([ticker)
+    **Current Price:** $[current_price] [trend_arrow]
+    **Recommendation:** [buy_hold_sell_with_emoji]
+    **Confidence Level:** [high_medium_low]
+    
+    ---
+    
+    ## MARKET DATA & PERFORMANCE
+    
+    ### Price Information
+    - **Current Price:** $[current_price] [trend_arrow] ([daily_change]% today)
+    - **6-Month Performance:** [6_month_change]%
+    - **Market Cap:** $[market_cap]
+    - **Revenue**: $/[revenue]
+
+    ### Chart Reference
+     **Visual Analysis:** [chart_filename]
+    - [chart_analysis_summary]
+    
+    ## NEWS & SENTIMENT ANALYSIS
+    
+    ### Recent Headlines
+    1. "[headline_1]" - [sentiment  : Bearish/Some /Bullish/Neutral]
+    2. "[headline_2]" - [sentiment_2]
+    3. "[headline_3]" - [sentiment_3]
+    
+    ### Sentiment Metrics
+    - **Overall Sentiment:** [sentiment_score]/100 ([sentiment_label])
+    - **News Volume:** [high_medium_low]
+    - **Market Reaction:** [positive_neutral_negative]
+    
+    ---
+    
+    ## INVESTMENT DECISION
+    
+    ### Recommendation: [BUY_HOLD_SELL]
+    
+    **Rationale:**
+    - [reason_1]
+    - [reason_2]
+    - [reason_3]
+    
+    **Risk Level:** [low_medium_high]
+    
+    **Target Price:** $[target_price] ([upside_percentage]% upside)
+    **Stop Loss:** $[stop_loss_price] ([downside_percentage]% protection)
+    
+    ---
+    
+    ## DECISION SUMMARY TABLE
+    
+    | Company | Current Price | Sentiment | Trend | Volume | Recommendation |
+    |---------|---------------|-----------|-------|--------|----------------|
+    | [ticker] | $[current_price] | [sentiment] | [trend] | [volume] | **[BUY_HOLD_SELL]** |
+    
+    ---
+    
+    **Risk Disclaimer:** This analysis is for informational purposes only. Always conduct your own thorough research and consult with a qualified financial advisor before making any investment decisions.
+    
+    **Generated:** [timestamp]
+
+  expected_output: >
+    A comprehensive investment decision report in markdown format with:
+    1. Executive summary with clear recommendation
+    2. Complete market data (no placeholders or missing values)
+    3. Technical analysis with moving averages and trends
+    4. News sentiment analysis with actual headlines
+    5. Investment rationale with target prices
+    6. Risk assessment and decision summary table
+    7. Professional formatting with emojis and clear structure
+    
+    IMPORTANT: If any data is genuinely unavailable, explicitly state "Data not available" 
+    rather than leaving placeholder text like "<52-week low>".
+
+  agent: decision_support_agent
+  context: [company_extractor_task, ticker_lookup_task, stock_price_analyzer_task, company_researcher_task, chart_visualization_task]
+
+
+# # Additional task for data validation
+# data_validation_task:
+#   description: >
+#     Before the final report, validate that all required data is available:
+    
+#     REQUIRED DATA CHECKLIST:
+#     Company name and ticker symbol
+#      Current stock price
+#      5-day and 6-month performance
+#      Market cap
+#      52-week high and low
+#      Moving averages (MA20, MA50)
+#      Volume analysis
+#      At least 3 recent news headlines
+#      Sentiment score
+#      Chart file reference
+    
+#     If any data is missing, flag it clearly and request the missing information
+#     from the appropriate agent before proceeding to final report generation.
+    
+#   expected_output: >
+#     Data validation report confirming all required information is available,
+#     or clear identification of missing data that needs to be obtained.
+    
+#   agent: decision_support_agent
+
+
+# # This task creates a comparative summary of all analyzed companies
+# comparative_summary_task:
+#   description: >
+#     Create a comparative investment summary for all companies analyzed in this session.
+    
+#     Review the individual investment reports generated for each company and create:
+    
+#     1. **Individual Company Summaries** - Brief recap of each company's key metrics and recommendation
+#     2. **Comparative Analysis** - Side-by-side comparison of performance, sentiment, and recommendations  
+#     3. **Portfolio Recommendations** - Overall investment strategy considering all companies together
+#     4. **Risk Assessment** - Combined risk analysis across all investments
+    
+#     Format should be:
+    
+#     ## 📊 COMPARATIVE INVESTMENT SUMMARY
+    
+#     ### Individual Company Overview
+#     **Company 1 (Ticker)** - Current Price | Recommendation | Key Reason
+#     **Company 2 (Ticker)** - Current Price | Recommendation | Key Reason
+    
+#     ### Side-by-Side Comparison
+#     | Company | Price | 6M Performance | Sentiment | Risk | Recommendation |
+#     |---------|-------|----------------|-----------|------|----------------|
+#     | Ticker1 | $XXX  | +X.XX%        | Bullish   | Low  | BUY           |
+#     | Ticker2 | $XXX  | -X.XX%        | Bearish   | High | SELL          |
+    
+#     ### Overall Portfolio Strategy
+#     - Best performer and why
+#     - Highest risk investment  
+#     - Recommended allocation percentages
+#     - Overall market outlook for these companies
+    
+#     ### Final Investment Summary
+#     Provide clear guidance on which companies to prioritize and overall investment strategy.
+
+#   expected_output: >
+#     A comprehensive comparative summary showing:
+#     1. Brief recap of each company's analysis
+#     2. Side-by-side comparison table
+#     3. Portfolio allocation recommendations
+#     4. Overall investment strategy for all companies analyzed
+    
+#   agent: decision_support_agent
+#   context: [decision_support_task]

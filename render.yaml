@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: mars-backend
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn MARS_BACKEND.wsgi:application --bind 0.0.0.0:$PORT
+    envVars:
+      - key: DATABASE_URL
+        value: your_database_url_here
+      - key: WEB_CONCURRENCY
+        value: 4

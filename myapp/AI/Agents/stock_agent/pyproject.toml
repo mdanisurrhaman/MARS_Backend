@@ -1,0 +1,23 @@
+[project]
+name = "new_decision_support"
+version = "0.1.0"
+description = "new_decision_support using crewAI"
+authors = [{ name = "Uzma Khatun", email = "uzmakhatun@gmail.com" }]
+requires-python = ">=3.10,<3.14"
+dependencies = [
+    "crewai[tools]>=0.152.0,<1.0.0"
+]
+
+[project.scripts]
+new_decision_support = "new_decision_support.main:run"
+run_crew = "new_decision_support.main:run"
+train = "new_decision_support.main:train"
+replay = "new_decision_support.main:replay"
+test = "new_decision_support.main:test"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.crewai]
+type = "crew"
