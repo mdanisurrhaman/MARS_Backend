@@ -1,0 +1,688 @@
+📄 API Documentation — Upload Teaser Files
+🧩 API Overview
+
+This API allows users to upload up to 5 teaser files (images, PDFs, etc.) to an Amazon S3 bucket.
+It validates file size, stores them securely in S3, and saves the list of file URLs inside the UploadedTeaser model.
+
+🔹 Endpoint
+
+POST /api/upload-teasers/
+
+🔐 Permission
+
+Public (AllowAny)
+
+No authentication required
+
+🔧 Request Type
+
+multipart/form-data
+
+🧠 Request Parameters (Form-Data)
+Field Name	Type	Required	Description
+teaser_file	File	✅ Yes	Multiple teaser files to upload (use same key name for all files)
+
+⚠️ You can upload a maximum of 5 files at once.
+Each file must be ≤ 10 MB.
+
+🧾 Example Payload (in Postman)
+
+Set Body → form-data
+Add multiple rows with the same key name teaser_file
+
+Key	Type	Value
+teaser_file	File	📁 myphoto.jpg
+teaser_file	File	📁 Md-Anisurrhaman_Resume.pdf
+teaser_file	File	📁 anotherphoto.jpg
+✅ Successful Response (HTTP 201)
+{
+    "message": "Files uploaded successfully",
+    "meta": {
+        "id": "640b0987-2d36-4d75-ba87-64fd1302867a",
+        "files": [
+            "https://affycloud-teaser-bucket.s3.ap-south-1.amazonaws.com/teasers/64c7a600-cebf-4ee2-a3d2-40210d544acc_myphoto.jpg",
+            "https://affycloud-teaser-bucket.s3.ap-south-1.amazonaws.com/teasers/4fb0041a-3d31-41c0-b028-eebcfd5b1122_Md-Anisurrhaman_Resume.pdf",
+            "https://affycloud-teaser-bucket.s3.ap-south-1.amazonaws.com/teasers/784b12bd-41c7-494f-ad6b-3b55e198fa28_myphoto.jpg"
+        ]
+    },
+    "error": false
+}
+
+🔍 Response Details
+Field	Type	Description
+message	string	Status message of the upload
+meta.id	string (UUID)	Unique ID of the UploadedTeaser record in database
+meta.files	list[string]	List of S3 URLs for all successfully uploaded files
+error	boolean	False if upload successful, True if failed
+⚠️ Error Responses
+1️⃣ No Files Provided
+{
+    "message": "No files provided",
+    "error": true
+}
+
+2️⃣ File Count Limit Exceeded
+{
+    "message": "You can upload a maximum of 5 files at once.",
+    "error": true
+}
+
+3️⃣ File Size Limit Exceeded
+{
+    "message": "File 'large_file.pdf' exceeds 10 MB limit.",
+    "error": true
+}
+
+4️⃣ Internal Server Error
+{
+    "message": "Upload failed: <error details>",
+    "error": true
+}
+
+🧮 Performance Metrics
+Metric	Value
+Average Upload Time	⏱️ 4.65 seconds
+Max File Size	10 MB per file
+Max Files per Request	5
+Storage	Amazon S3 (via S3Boto3Storage)
+Database Model	UploadedTeaser with JSONField files storing URLs
+🧰 Model Reference: UploadedTeaser
+class UploadedTeaser(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    files = models.JSONField(default=list)  # List of full S3 URLs only
+    uploaded_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return str(self.id)
+
+⚙️ How It Works (Process Explanation)
+
+Client uploads files → as multipart/form-data under key teaser_file.
+
+Backend validation:
+
+Checks number of files (max 5)
+
+Checks size limit (10 MB per file)
+
+Files uploaded to S3 using S3Boto3Storage.
+
+Public S3 URLs are stored in UploadedTeaser.files JSON field.
+
+Returns unique ID and all file URLs in JSON response.
+
+🔗 Next Step (Integration Tip)
+
+You can use the meta.id or the files list from this response to link these teasers to your NewOpportunity model like this:
+
+{
+  "company_name": "ABC Ventures",
+  "opportunity_name": "Series A Investment",
+  "teaser_files": [
+    "https://affycloud-teaser-bucket.s3.ap-south-1.amazonaws.com/teasers/64c7a600-cebf-4ee2-a3d2-40210d544acc_myphoto.jpg",
+    "https://affycloud-teaser-bucket.s3.ap-south-1.amazonaws.com/teasers/4fb0041a-3d31-41c0-b028-eebcfd5b1122_Md-Anisurrhaman_Resume.pdf"
+  ]
+}
+
+🧾 Summary
+Feature	Description
+API Name	Upload Teasers
+Endpoint	/api/upload-teasers/
+Method	POST
+Authentication	None
+Input	Form-data (Files)
+Output	JSON with URLs
+Time Taken	~4.65 seconds
+Storage	Amazon S3
+Model	UploadedTeaser
+
+=================================================================================================================================================
+🧩 API Endpoint Documentation
+Endpoint: POST /api/opportunity/analyze-teasers/
+🔍 Overview
+
+This endpoint allows the user to create a new investment opportunity while simultaneously triggering AI-based teaser analysis in the background.
+
+The uploaded teaser file URLs are stored with the opportunity record, and an AI worker (Celery / background task) starts analyzing them asynchronously for insights like ESG score, valuation relevance, and strategic fit.
+
+⚙️ Request Details
+
+Method: POST
+URL: http://127.0.0.1:8000/api/opportunity/analyze-teasers/
+Auth Required: ❌ No (can be changed to JWT or AdminOnly later)
+Content-Type: application/json
+
+🧾 Request Payload Example
+{
+  "company_name": "Project Edinburgh",
+  "sector": "Real Estate",
+  "deal_type": "Acquisition",
+  "country": "India",
+  "opportunity_name": "new_opp",
+  "teaser_files": [
+    "https://affycloud-teaser-bucket.s3.ap-south-1.amazonaws.com/teasers/64c7a600-cebf-4ee2-a3d2-40210d544acc_myphoto.jpg",
+    "https://affycloud-teaser-bucket.s3.ap-south-1.amazonaws.com/teasers/4fb0041a-3d31-41c0-b028-eebcfd5b1122_Md-Anisurrhaman_Resume.pdf",
+    "https://affycloud-teaser-bucket.s3.ap-south-1.amazonaws.com/teasers/784b12bd-41c7-494f-ad6b-3b55e198fa28_myphoto.jpg"
+  ],
+  "description": "Analyzing potential acquisition targets",
+  "esg_score": 82.5,
+  "strategic_fit_score": 90.0,
+  "valuation_estimate": 45000000,
+  "decision_status": "draft"
+}
+
+✅ Response Example
+{
+  "message": "Opportunity created successfully — AI processing started",
+  "error": false,
+  "meta": {
+    "opportunity_id": "5e715955-0a73-40dd-815d-9a46ae59024a",
+    "status": "processing"
+  }
+}
+
+🧠 How It Works (Step-by-Step Logic)
+Step	Description
+1️⃣ Receive Request	The API receives the JSON payload containing company, deal details, and teaser file URLs.
+2️⃣ Validate Input	Serializer checks if all required fields exist and are valid (JSONField, CharField, etc.).
+3️⃣ Create Record	A new NewOpportunity object is saved in the database with status='draft'.
+4️⃣ Start Background Task	Once saved, an AI background task (Celery) is triggered to analyze the teaser files (image/PDF content, ESG fit, valuation hints, etc.).
+5️⃣ Respond Immediately	The endpoint returns a success message with the opportunity_id and status: processing — meaning AI work is happening asynchronously.
+6️⃣ Later Processing	The AI process updates results in related models (like TeaserAnalysis) after completing.
+⚡ Performance
+Metric	Value
+Average Response Time	1.59 seconds
+File Upload Type	Remote S3 URLs (no direct file transfer in this API)
+Background Processing	Celery Worker / Async Task
+DB Transactions	1 Insert (into NewOpportunity)
+💬 Notes
+
+The endpoint does not block for AI analysis — it immediately responds after storing the opportunity and dispatching the task.
+
+S3 URLs in teaser_files are validated as a list of strings.
+
+Future enhancements may include progress tracking or notification updates when AI analysis completes.
+
+==========================================================================================================================================================================================
+📘 API: Get AI Analysis of Uploaded Teasers
+Endpoint
+GET /api/opportunity/get-analysis/<opportunity_id>/
+
+Description
+
+This API retrieves the latest AI-generated analysis report for a given opportunity.
+It shows extracted details, insights, and analysis results generated by the AI model based on uploaded teaser files.
+
+🧠 How It Works
+
+When /analyze-teasers/ API is called, AI processing starts in the background.
+
+Each teaser file is extracted, screened, and analyzed by the AI.
+
+The results are saved in the TeaserAnalysis model.
+
+This endpoint fetches the most recent analysis using opportunity_id.
+
+If AI is still processing → shows “processing” messages.
+
+Once AI completes → returns full analysis (extractor + analyst response).
+
+Average Processing Time: ~1.59 seconds
+
+🔹 Request Example
+
+Method: GET
+URL:
+
+http://127.0.0.1:8000/api/opportunity/get-analysis/c18b3eb3-77ce-4d82-9d2f-9213dc04c710/
+
+
+Headers:
+
+{
+  "Content-Type": "application/json"
+}
+
+
+Body:
+No body required (GET request).
+
+✅ Successful Response Example
+{
+  "message": "Analysis fetched successfully",
+  "meta": {
+    "opportunity_id": "c18b3eb3-77ce-4d82-9d2f-9213dc04c710",
+    "teaser_id": "dbc37a92-5b78-4c1f-bdae-7bb0efebafd9",
+    "ai_response_teaser_extractor": {
+      "report_title": "Investment Overview Report",
+      "overview": ["Md Anisurrhaman", "Aspiring Full Stack Developer"],
+      "investment_highlights": ["Proficient in Django & DRF", "Experience in API development"]
+    },
+    "ai_response_teaser_analyst": {
+      "Executive Summary: Core Investment Thesis": "Backend developer skilled in Django & API systems.",
+      "Core Business Strengths & Value Proposition": [
+        "Specialized in Django REST Framework",
+        "Experienced in JWT authentication and scalable backend design"
+      ]
+    },
+    "status": "processing",
+    "updated_at": "2025-11-12T08:20:32.841088Z"
+  },
+  "error": false
+}
+
+⚠️ Other Responses
+
+AI Not Started Yet
+
+{
+  "message": "AI not started yet",
+  "error": false
+}
+
+
+AI Processing Failed
+
+{
+  "message": "AI processing failed. Please retry.",
+  "error": true
+}
+
+📄 Response Fields Description
+Field	Type	Description
+opportunity_id	string (UUID)	ID of the analyzed opportunity
+teaser_id	string (UUID)	AI-generated analysis record ID
+ai_response_teaser_extractor	object	Extracted insights from uploaded teaser
+ai_response_teaser_analyst	object	AI’s analytical summary and findings
+status	string	processing, completed, or failed
+updated_at	datetime	Last updated timestamp
+error	boolean	false if successful, otherwise true
+===================================================================================================================================================================================
+
+API Documentation: Get ESG Screening Report
+Endpoint
+GET /api/opportunity/get-esg-screening/<opportunity_id>/
+
+🧩 Overview
+
+This API retrieves the AI-generated ESG (Environmental, Social, and Governance) screening report for a specific investment opportunity.
+
+Once a teaser document (PDF, image, etc.) is uploaded and analyzed through the /analyze-teasers/ endpoint,
+the background AI system processes the document for ESG compliance and sustainability analysis.
+
+This endpoint fetches the final or in-progress ESG report.
+
+⚙️ How It Works
+
+The user first uploads teaser files using /upload-teasers/ and then calls /analyze-teasers/.
+
+The backend triggers asynchronous AI tasks (via Celery/Threads) to perform:
+
+Environmental analysis → checks carbon footprint, sustainability policies
+
+Social analysis → checks employee welfare, diversity, inclusion
+
+Governance analysis → checks ethics, transparency, and security practices
+
+AI saves the analysis in the TeaserAnalysis model linked to the opportunity_id.
+
+This API fetches the latest ESG result for that opportunity_id.
+
+Depending on AI progress:
+
+If completed → returns ESG report (as JSON)
+
+If still running → returns “AI is performing ESG screening…”
+
+If failed → returns error message
+
+Average Response Time: ~1.58 seconds
+
+📥 Request Example
+
+Method: GET
+
+URL:
+
+http://127.0.0.1:8000/api/opportunity/get-esg-screening/c18b3eb3-77ce-4d82-9d2f-9213dc04c710/
+
+
+Headers:
+
+{
+  "Content-Type": "application/json"
+}
+
+
+Body:
+None (GET request does not require body).
+
+✅ Successful Response (200 OK)
+{
+  "message": "ESG screening fetched successfully",
+  "meta": {
+    "opportunity_id": "c18b3eb3-77ce-4d82-9d2f-9213dc04c710",
+    "ai_response_esg_screening": {
+      "company_name": "AFFY CLOUD IT SOLUTION (IT Services Context)",
+      "environmental": {
+        "score": 5.0,
+        "concerns": [
+          "Zero disclosed policies regarding energy consumption or operational efficiency.",
+          "Lack of strategy for managing Scope 3 emissions arising from heavy cloud service usage and data centers.",
+          "Absence of a formalized e-waste management or hardware recycling program."
+        ],
+        "positives": [
+          "Inherently low direct operational footprint compared to heavy industry sectors.",
+          "Focus on digital solutions minimizes resource consumption related to paper and physical infrastructure.",
+          "Potential for promoting remote work models, reducing commuter emissions."
+        ],
+        "recommendations": [
+          "Conduct a baseline audit of energy usage across offices and cloud resources.",
+          "Implement a certified 'green IT' procurement and disposal policy for all hardware.",
+          "Develop specific targets for reducing the operational carbon footprint (e.g., optimizing code for lower power usage)."
+        ]
+      },
+      "social": {
+        "score": 7.5,
+        "concerns": [
+          "Lack of publicly disclosed diversity, equity, and inclusion (DEI) metrics.",
+          "No specified formal policies regarding employee health, safety, or mental wellbeing.",
+          "High reliance on competitive and demanding project timelines."
+        ],
+        "positives": [
+          "Strong emphasis on skill development, training, and using secure frameworks (Django, React).",
+          "Projects involve secure user authentication (JWT, RBAC).",
+          "Internal Employee Management System promotes operational fairness."
+        ],
+        "recommendations": [
+          "Publish a comprehensive employee H&S policy.",
+          "Establish measurable diversity targets.",
+          "Create structured feedback and grievance systems."
+        ]
+      },
+      "governance": {
+        "score": 6.5,
+        "concerns": [
+          "No disclosure of board structure or ethics policy.",
+          "Lack of anti-corruption and whistleblower policies.",
+          "No framework for third-party compliance."
+        ],
+        "positives": [
+          "Strong backend architecture for secure systems.",
+          "Proven accountability via role-based access control.",
+          "Good data management and operational transparency."
+        ],
+        "recommendations": [
+          "Publish a company Code of Ethics.",
+          "Create formal audit procedures.",
+          "Disclose conflict-of-interest and governance structure."
+        ]
+      },
+      "summary": {
+        "main_risk": "Significant governance and environmental risks due to lack of disclosure and sustainability policies.",
+        "main_strength": "Strong technical expertise, internal security, and low operational footprint.",
+        "improvement_roadmap": "Formalize policies on e-waste, Code of Conduct, and diversity KPIs within six months."
+      },
+      "summary_table": {
+        "environmental": {
+          "score": 5.0,
+          "key_strength": "Low operational footprint.",
+          "key_weakness": "No disclosed sustainability policy."
+        },
+        "social": {
+          "score": 7.5,
+          "key_strength": "Strong skill development and data security.",
+          "key_weakness": "Lack of DEI and welfare disclosure."
+        },
+        "governance": {
+          "score": 6.5,
+          "key_strength": "High technical control and accountability.",
+          "key_weakness": "No corporate ethics disclosure."
+        },
+        "overall": {
+          "score": 6.35,
+          "verdict": "Conditional Pass"
+        }
+      },
+      "overall_esg_score": 6.35,
+      "overall_esg_verdict": "Conditional Pass"
+    },
+    "status": "completed",
+    "updated_at": "2025-11-12T08:20:47.951630Z"
+  },
+  "error": false
+}
+
+⚠️ Error & Status Responses
+Scenario	HTTP Code	Example Response
+AI Not Started Yet	202	{ "message": "AI not started yet", "error": false }
+Still Processing	200	{ "message": "ESG screening fetched successfully", "meta": { "ai_response_esg_screening": "AI is performing ESG screening..." }, "error": false }
+AI Failed	500	{ "message": "ESG screening failed. Please retry.", "error": true }
+📊 Response Field Reference
+Field	Type	Description
+opportunity_id	string (UUID)	Unique ID of the opportunity
+ai_response_esg_screening	object	ESG analysis data (Environmental, Social, Governance)
+status	string	Status of analysis — processing, completed, or failed
+updated_at	datetime	Time of last update
+overall_esg_score	float	Weighted ESG score out of 10
+overall_esg_verdict	string	Final verdict — Pass / Conditional Pass / Fail
+error	boolean	Indicates success or error
+🕓 Performance Summary
+Metric	Value
+Average Execution Time	1.59 seconds
+AI Model Type	ESG Text Analyzer (Custom LLM)
+Data Source	Extracted from teaser PDFs/images via OCR and NLP
+Output Format	Structured JSON
+Frequency	Real-time / On-demand
+
+================================================================================================================================================================================================
+API: Get Uploaded Teasers
+Endpoint
+GET /api/opportunity/get-uploaded-teasers/
+
+Description
+
+This API retrieves all uploaded teaser files (usually PDF, images, etc.) stored in the system.
+Each teaser record represents a set of uploaded files that are stored in Amazon S3 and recorded in the UploadedTeaser model.
+
+Workflow
+
+When this API is called, the backend queries the UploadedTeaser table.
+
+If teasers exist, it fetches all file URLs and returns them with timestamps.
+
+If there are no teasers uploaded yet, it returns an empty list ("meta": []).
+
+The response is formatted with a message, meta data, and error flag for clarity.
+
+Typical execution time: ~1.08 seconds.
+
+Response (No Files Uploaded Yet)
+{
+  "message": "Uploaded files fetched successfully",
+  "meta": [],
+  "error": false
+}
+
+Response (When Files Exist — Example)
+{
+  "message": "Uploaded files fetched successfully",
+  "meta": [
+    {
+      "id": "b21e1a55-6e3a-4f2f-9a6b-9c63cf0a30d8",
+      "files": [
+        "https://affycloud-teaser-bucket.s3.ap-south-1.amazonaws.com/teasers/64c7a600-cebf-4ee2-a3d2-40210d544acc_myphoto.jpg",
+        "https://affycloud-teaser-bucket.s3.ap-south-1.amazonaws.com/teasers/4fb0041a-3d31-41c0-b028-eebcfd5b1122_Md-Anisurrhaman_Resume.pdf"
+      ],
+      "uploaded_at": "2025-11-12T08:15:47.951630Z"
+    }
+  ],
+  "error": false
+}
+
+Key Response Fields
+Field	Type	Description
+message	string	Human-readable message about the request result
+meta	array	List of uploaded teaser records (empty if none)
+meta[].id	string (UUID)	Unique ID of each uploaded teaser record
+meta[].files	array	S3 URLs of the uploaded teaser files
+meta[].uploaded_at	datetime	Timestamp when files were uploaded
+error	boolean	Indicates whether the request failed (true/false)
+Performance
+
+⏱ Response Time: 1.08 seconds
+⚙️ Status Code: 200 OK
+📦 Data Source: PostgreSQL (UploadedTeaser model)
+🌐 Storage: Amazon S3 (teaser file URLs)
+
+
+==============================================================================================================================================================================================
+API: Company Identification
+Endpoint
+POST /api/company-identification
+
+Description
+
+This API identifies a company based on AI-extracted data from the uploaded teaser analysis.
+It takes a teaser_id, retrieves its analysis record, processes the company_overview section using the identify_company() AI function, and saves the result in the CompanyIdentificationRecord model.
+
+🧾 Request Payload
+✅ Example:
+{
+  "teaser_id": "dbc37a92-5b78-4c1f-bdae-7bb0efebafd9"
+}
+
+
+Field Description:
+
+Field	Type	Required	Description
+teaser_id	string (UUID)	✅ Yes	The unique ID of the TeaserAnalysis record generated during AI analysis.
+✅ Successful Response (200 OK)
+{
+  "message": "Company identification successful",
+  "meta": {
+    "identification": {
+      "company_name": "AFFY CLOUD IT SOLUTION",
+      "confidence_score": 0.98,
+      "identified_keywords": ["Backend Developer", "Django", "Bhopal India"]
+    }
+  },
+  "error": false
+}
+
+❌ Error Responses
+Missing teaser_id
+{
+  "message": "teaser_id is required",
+  "error": true
+}
+
+Invalid teaser_id
+{
+  "message": "No TeaserAnalysis matches the given query.",
+  "error": true
+}
+
+Invalid JSON format
+{
+  "message": "Invalid JSON format in ai_response",
+  "error": true
+}
+
+⚙️ Workflow Summary
+
+Client sends POST request with teaser_id.
+
+Backend fetches related TeaserAnalysis record.
+
+Extracts and parses the AI response (company overview).
+
+Calls identify_company() AI helper to identify company details.
+
+Saves the result to CompanyIdentificationRecord.
+
+Returns structured response with meta.identification data.
+=============================================================================================================================================================================================
+
+
+
+
+
+
+
+
+API: Fetch All Teaser Analyses
+Endpoint
+GET /api/fetch-all/teaser-analysis
+
+📤 Request Payload
+
+This endpoint does not require any request body or parameters.
+
+✅ Example Request:
+
+GET /api/fetch-all/teaser-analysis
+
+✅ Successful Response (200 OK)
+{
+  "message": "All teaser analyses fetched successfully",
+  "data": [
+    {
+      "id": "dbc37a92-5b78-4c1f-bdae-7bb0efebafd9",
+      "opportunity": {
+        "id": "c18b3eb3-77ce-4d82-9d2f-9213dc04c710",
+        "company_name": "Project Edinburgh",
+        "opportunity_name": "new_opp",
+        "sector": "Real Estate",
+        "deal_type": "Acquisition",
+        "country": "India",
+        "status": "completed"
+      },
+      "ai_response_teaser_extractor": {...},
+      "ai_response_teaser_analyst": {...},
+      "ai_response_esg_screening": {...},
+      "status": "completed",
+      "created_at": "2025-11-12T08:20:30.851Z",
+      "updated_at": "2025-11-12T08:20:47.951Z"
+    }
+  ],
+  "error": false
+}
+
+❌ Error Responses
+No data found
+{
+  "message": "No teaser analyses found",
+  "error": true
+}
+
+Internal error
+{
+  "message": "An unexpected error occurred",
+  "error": true
+}
+
+⚙️ How It Works
+
+The API retrieves all records from the TeaserAnalysis table.
+
+It joins related data from the Opportunity model (select_related('opportunity')).
+
+Results are serialized using TeaserAnalysisSerializer.
+
+Returns a list of analyses in reverse chronological order (latest first).
+
+Average processing time: 1.12 seconds ⏱️
+
+
+
+
+
+
+
+
+
+
+
+
+
